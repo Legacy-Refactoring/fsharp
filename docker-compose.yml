@@ -13,7 +13,14 @@ services:
       - ./init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
       - ./seeder.sql:/docker-entrypoint-initdb.d/02-seeder.sql:ro
 
-  lang:
+  fsharp:
+    image: mcr.microsoft.com/dotnet/sdk:9.0
+    container_name: legacy_fsharp
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - db
 
 volumes:
   postgres_data:
